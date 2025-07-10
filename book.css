@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: white;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+.container {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    /* Add some padding at the bottom */
+}
+
+.return {
+    display: flex;
+    justify-content: space-between;
+}
+
+.re-bt {
+    background-color: white;
+    color: #000;
+    text-align: center;
+    padding: 0.7em 1em;
+    border-radius: 0 0 30px 0;
+    font-size: 2em;
+    cursor: pointer;
+    border: none;
+    /* Remove default button border */
+}
+
+.return h1 {
+    text-align: center;
+    font-size: 5dvh;
+    padding: 0 1em 0 0;
+    margin: auto;
+}
+
+.stage {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    color: #000;
+    border-radius: 10px;
+    align-items: center;
+    margin: 0 auto;
+    width: 35dvh;
+    height: 15dvh;
+    margin-top: 5dvh;
+    gap: 10px;
+    /* Add some space between image and text */
+}
+
+.stage img {
+    width: 40px;
+    height: 40px;
+}
+
+.table-bt,
+.outside-table-bt {
+    /* border: 2px solid red; /* Keep for debugging if needed */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    gap: 2dvh;
+    margin: 20px auto;
+    /* Adjust top margin as needed */
+    /* height: 50dvh; /* Remove fixed height to allow content to dictate height */
+    width: fit-content;
+    /* Adjust width to content */
+    padding: 0 20px;
+    /* Add some horizontal padding */
+}
+
+.bt {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    padding: 1em;
+    width: 10dvh;
+    height: 10dvh;
+    border-radius: 1em;
+    align-items: center;
+    cursor: pointer;
+    /* Center the image vertically */
+}
+
+.bt img {
+    width: 100%;
+    /* Make image fill the button */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+/* Remove this specific nth-child rule as the "outside" section now handles the separation */
+/* .table-bt > .bt:nth-child(n+10) {
+    margin-top: 20px;
+} */
+
+.outside-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    /* Adjust margin as needed */
+    width: 100%;
+}
+
+.divider-line {
+    flex-grow: 1;
+    /* Allows the line to expand */
+    height: 0.3dvh;
+    background-color: white;
+    margin: 0 10px;
+    /* Space around the text */
+}
+
+.divider-text {
+    background-color: #fcfcfc;
+    /* Match background for the "cutout" effect */
+    border-radius: 10px;
+    padding: 1dvh;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
