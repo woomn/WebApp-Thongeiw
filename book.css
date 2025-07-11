@@ -60,9 +60,13 @@ body {
     /* Add some space between image and text */
 }
 
+.stage h1 {
+    font-size: 5dvh;
+}
+
 .stage img {
-    width: 40px;
-    height: 40px;
+    width: 5dvh;
+    height: 5dvh;
 }
 
 .table-bt,
