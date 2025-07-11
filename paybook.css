@@ -84,6 +84,7 @@ img {
     border-radius: 20px;
     margin: 0 auto;
     margin-bottom: 10dvh;
-    width: 17dvh;
-    height: 7dvh;
+    width: 16dvh;
+    height: 6dvh;
+    font-size: 1.8dvh;
 }
