@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     height: 100dvh;
     display: flex;
     flex-direction: column;
@@ -80,6 +80,7 @@ img {
     justify-content: center;
     align-items: center;
     background-color: #10B95F;
+    color: #000;
     border: none;
     border-radius: 20px;
     margin: 0 auto;
