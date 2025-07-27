@@ -25,8 +25,9 @@ body {
 .language-switch {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1dvh;
     align-self: flex-end;
+    font-size: 2dvh;
 }
 
 .switch {
@@ -77,19 +78,19 @@ input:checked+.slider:before {
 .logo {
     text-align: center;
     display: flex;
-    gap: 10px;
+    gap: 2dvh;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
 .logo-shop {
-    width: 80px;
+    width: 10dvh;
     max-width: 100%;
 }
 
 .logo h1 {
-    font-size: clamp(30px, 5vw, 60px);
+    font-size: 8dvh;
     font-weight: bold;
     margin-top: 20px;
 }
@@ -97,10 +98,10 @@ input:checked+.slider:before {
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 7dvh;
     width: 100%;
     align-items: center;
-    padding-bottom: 150px;
+    padding-bottom: 20dvh;
 }
 
 .btn1,
@@ -108,14 +109,14 @@ input:checked+.slider:before {
     display: flex;
     background-color: white;
     color: #6750A4;
-    padding: 15px 20px;
+    padding: 2dvh 2dvh;
     border: none;
     border-radius: 12px;
-    font-size: 16px;
+    font-size:  2dvh;
     font-weight: bold;
     cursor: pointer;
     width: 100%;
-    max-width: 250px;
+    max-width: 30dvh;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -124,7 +125,7 @@ input:checked+.slider:before {
 
 .table,
 .food {
-    width: 30px;
+    width: 5dvh;
     height: auto;
 }
 
@@ -139,7 +140,7 @@ input:checked+.slider:before {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: clamp(200px, 50vw, 500px);
+    width: 30dvh;
     /* ขนาดยืดหยุ่นตามจอ */
     transform: rotate(-30deg);
     /* ไม่หมุนแล้ว */
@@ -148,7 +149,7 @@ input:checked+.slider:before {
 }
 
 /* Responsive fallback */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
 
     .btn1,
     .btn2 {
@@ -163,4 +164,4 @@ input:checked+.slider:before {
     .beer {
         transform: rotate(-30deg);
     }
-}
+} */
