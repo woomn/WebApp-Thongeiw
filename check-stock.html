@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Stock</title>
+    <style>
+        html,body{
+            height:100%;
+            margin:0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background-color:#3a3636;
+            color:aliceblue;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+        }
+
+        .stock-table th,
+        .stock-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stock-table th {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Add these new styles */
+        .quantity-input {
+            width: 60px;
+            padding: 6px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            text-align: center;
+        }
+
+        .update-btn {
+            padding: 6px 12px;
+            margin-left: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Management</h1>
+        <input type="text" class="search-bar" placeholder="Search products...">
+        
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Chang Beer</td>
+                    <td>Beer</td>
+                    <td>
+                        <input type="number" class="quantity-input" value="50" min="0">
+                        <button class="update-btn">Update</button>
+                    </td>
+                    <td>In Stock</td>
+                </tr>
+                <tr>
+                    <td>Singha Beer</td>
+                    <td>Beer</td>
+                    <td>
+                        <input type="number" class="quantity-input" value="30" min="0">
+                        <button class="update-btn">Update</button>
+                    </td>
+                    <td>Low Stock</td>
+                </tr>
+                <tr>
+                    <td>Leo Beer</td>
+                    <td>Beer</td>
+                    <td>
+                        <input type="number" class="quantity-input" value="75" min="0">
+                        <button class="update-btn">Update</button>
+                    </td>
+                    <td>In Stock</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+const updateStatus = (input) => {
+    const row = input.closest('tr');
+    const statusCell = row.querySelector('td:last-child');
+    const quantity = parseInt(input.value);
+
+    if (quantity <= 0) {
+        statusCell.textContent = 'Out of Stock';
+        statusCell.style.color = '#ff4444';
+    } else if (quantity <= 30) {
+        statusCell.textContent = 'Low Stock';
+        statusCell.style.color = '#ffbb33';
+    } else {
+        statusCell.textContent = 'In Stock';
+        statusCell.style.color = '#00C851';
+    }
+};
+
+// Add event listeners to all quantity inputs
+document.querySelectorAll('.quantity-input').forEach(input => {
+    input.addEventListener('change', () => updateStatus(input));
+});
+
+// Add event listeners to update buttons
+document.querySelectorAll('.update-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const input = button.previousElementSibling;
+        updateStatus(input);
+    });
+});
+</script>
+</body>
+</html>
