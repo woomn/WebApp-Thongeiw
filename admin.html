@@ -94,12 +94,44 @@
       text-align:center;
       margin-bottom:12px;
       font-size:1.25rem;
+    } 
+    .beer-bg {
+      position: absolute;
+      bottom: 60px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .beer {
+      width: 250px;
+      height: auto;
+      
+    }
+
+    /* Logo styles */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .logo {
+      width: 120px;
+      height: auto;
     }
   </style>
+       <div class="beer-bg">
+        <img class="beer" src="assets/images/cheers.png" alt="beer" />
+      </div>
+
+    </div>
+  <script src="assets/js/translate.js"></script>
 </head>
 <body>
   <div class="page">
     <form action="" aria-label="Admin login form">
+      <div class="logo-container">
+        <img class="logo" src="assets/images/Logo.png" alt="Tong Eiw Logo">
+      </div>
       <h1>Welcome to TONG EIW </h1>
       <fieldset>
         <legend>Admin</legend>
@@ -123,5 +155,6 @@
       </fieldset>
     </form>
   </div>
+  
 </body>
 </html>
