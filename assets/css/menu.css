@@ -26,6 +26,13 @@ header.return {
     justify-content: space-between;
 }
 
+header.return h1 {
+    text-align: center;
+    font-size: 5dvh;
+    /* padding: 0 1em 0 0; */
+    margin: auto;
+}
+
 .re-bt {
     background-color: white;
     color: #000;
@@ -37,23 +44,98 @@ header.return {
     border: none;
 }
 
-header.return h1 {
-    text-align: center;
-    font-size: 5dvh;
-    padding: 0 1em 0 0;
-    margin: auto;
+/* ช่องอาหารและเครื่องดื่มเป็น flex column */
+.food, .drink {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: #ccc;
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 8dvh;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: none;
 }
 
-.food_bt{
-        grid-template-columns: repeat(3, 1fr);
+
+/* ปุ่ม + อยู่ตรงกลางใต้ชื่อเมนู */
+.menu {
+    background-color: white;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin: 0.5em auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
 }
 
-.food{
+
+
+.food_bt, .drink_bt {
+    margin-top: 10dvh;
+    font-size: 3dvh;
+}
+
+/* Basket bar at bottom center */
+.basket-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 2.5dvh;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.basket-icon {
+    position: relative;
+    background: #fff;
+    border-radius: 2em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    padding: 0.7em 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.basket-icon img {
+    width: 4dvh;
+    height: 4dvh;
+    object-fit: contain;
+}
+
+.basket-badge {
+    position: absolute;
+    top: -0.5em;
+    right: -0.5em;
+    background: #c33;
+    color: #fff;
+    font-size: 2dvh;
+    border-radius: 50%;
+    padding: 0.2em 0.7em;
+    font-weight: bold;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+}
+
+/* Grid สำหรับเมนูอาหารและเครื่องดื่ม */
+.menu-grid {
     display: grid;
-    background-color: thistle;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1dvh;
     justify-items: center;
-    gap: 5dvh;
-    margin: 20px auto;
-    width: 20px;
-    padding: 0 20px;
+    margin-bottom: 2em;
+}
+
+/* Responsive: ทุกขนาดหน้าจอเป็น 3 คอลัมน์ */
+.menu-grid {
+    grid-template-columns: repeat(3, 1fr);
 }
