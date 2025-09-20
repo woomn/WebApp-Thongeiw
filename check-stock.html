@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --background-dark: #1a1a1a;
+            --card-bg: #252525;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Form Styling */
+        .add-product-form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .add-product-form h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(33,150,243,0.2);
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #2c2c2c;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        tr:hover {
+            background-color: rgba(255,255,255,0.03);
+        }
+
+        /* Button Styling */
+        .add-btn, .update-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn {
+            background: var(--primary-color);
+            color: white;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .add-btn:hover {
+            background: #1976D2;
+            transform: translateY(-1px);
+        }
+
+        .update-btn {
+            background: #333;
+            color: white;
+            padding: 8px 16px;
+            margin-left: 8px;
+        }
+
+        .update-btn:hover {
+            background: #444;
+        }
+
+        /* Image Styling */
+        .product-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #333;
+        }
+
+        .img-preview {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #444;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .img-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 6px;
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Status Colors */
+        .status-in-stock {
+            color: #00C851;
+        }
+        
+        .status-low-stock {
+            color: #ffbb33;
+        }
+        
+        .status-out-stock {
+            color: #ff4444;
+        }
+
+        /* Sticker Styling */
+        .sticker-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .sticker {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="add-product-form">
+            <h2>Add New Product</h2>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="initialQuantity">Initial Quantity:</label>
+                    <input type="number" id="initialQuantity" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="productImage">Product Image:</label>
+                    <input type="file" id="productImage" accept="image/*" required>
+                    <div class="img-preview" id="imagePreview"></div>
+                </div>
+                <button type="submit" class="add-btn">Add Product</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="chang_beer.jpg" alt="Chang Beer" class="product-img"></td>
+                    <td>Chang Beer</td>
+                    <td>Beer</td>
+                    <td>
+                        <input type="number" class="quantity-input" value="50" min="0">
+                        <button class="update-btn">Update</button>
+                    </td>
+                    <td><span class="status-in-stock">In Stock</span></td>
+                </tr>
+                <tr>
+                    <td><img src="singha_beer.jpg" alt="Singha Beer" class="product-img"></td>
+                    <td>Singha Beer</td>
+                    <td>Beer</td>
+                    <td>
+                        <input type="number" class="quantity-input" value="30" min="0">
+                        <button class="update-btn">Update</button>
+                    </td>
+                    <td><span class="status-low-stock">Low Stock</span></td>
+                </tr>
+                <tr>
+                    <td><img src="leo_beer.jpg" alt="Leo Beer" class="product-img"></td>
+                    <td>Leo Beer</td>
+                    <td>Beer</td>
+                    <td>
+                        <input type="number" class="quantity-input" value="75" min="0">
+                        <button class="update-btn">Update</button>
+                    </td>
+                    <td><span class="status-in-stock">In Stock</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="sticker-container">
+        <img class="sticker" src="assets/images/cheers.png" alt="Cheers Sticker">
+    </div>
+
+    <script>
+const updateStatus = (input) => {
+    const row = input.closest('tr');
+    const statusCell = row.querySelector('td:last-child');
+    const quantity = parseInt(input.value);
+
+    if (quantity <= 0) {
+        statusCell.innerHTML = '<span class="status-out-stock">Out of Stock</span>';
+    } else if (quantity <= 30) {
+        statusCell.innerHTML = '<span class="status-low-stock">Low Stock</span>';
+    } else {
+        statusCell.innerHTML = '<span class="status-in-stock">In Stock</span>';
+    }
+};
+
+// Add input event listener for real-time updates
+document.querySelectorAll('.quantity-input').forEach(input => {
+    input.addEventListener('input', () => updateStatus(input));
+});
+
+// Add event listeners to update buttons
+document.querySelectorAll('.update-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const input = button.previousElementSibling;
+        updateStatus(input);
+    });
+});
+
+// Add this code after existing event listeners
+document.getElementById('productImage').addEventListener('change', function(e) {
+    const preview = document.getElementById('imagePreview');
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+});
+
+// Modify the form submission handler
+document.getElementById('productForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const productName = document.getElementById('productName').value;
+    const category = document.getElementById('category').value;
+    const quantity = document.getElementById('initialQuantity').value;
+    const imageFile = document.getElementById('productImage').files[0];
+    const imageUrl = imageFile ? URL.createObjectURL(imageFile) : '';
+    
+    const initialStatus = quantity <= 0 ? 
+        '<span class="status-out-stock">Out of Stock</span>' :
+        quantity <= 30 ? 
+            '<span class="status-low-stock">Low Stock</span>' :
+            '<span class="status-in-stock">In Stock</span>';
+    
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td><img src="${imageUrl}" alt="${productName}" class="product-img"></td>
+        <td>${productName}</td>
+        <td>${category}</td>
+        <td>
+            <input type="number" class="quantity-input" value="${quantity}" min="0">
+            <button class="update-btn">Update</button>
+        </td>
+        <td>${initialStatus}</td>
+    `;
+    
+    const tbody = document.querySelector('tbody');
+    tbody.appendChild(newRow);
+    
+    // Add event listeners to new row
+    const newInput = newRow.querySelector('.quantity-input');
+    const newButton = newRow.querySelector('.update-btn');
+    
+    newInput.addEventListener('change', () => updateStatus(newInput));
+    newButton.addEventListener('click', () => updateStatus(newInput));
+    
+    // Reset form and image preview
+    e.target.reset();
+    document.getElementById('imagePreview').innerHTML = '';
+});
+    </script>
+</body>
+</html>
