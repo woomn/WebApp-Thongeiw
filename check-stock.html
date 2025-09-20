@@ -370,6 +370,98 @@ document.getElementById('productForm').addEventListener('submit', (e) => {
     e.target.reset();
     document.getElementById('imagePreview').innerHTML = '';
 });
+
+    // Function to save quantities to localStorage
+    const saveQuantities = () => {
+        const products = {};
+        document.querySelectorAll('tr').forEach(row => {
+            const productName = row.querySelector('td:nth-child(2)')?.textContent;
+            const quantity = row.querySelector('.quantity-input')?.value;
+            if (productName && quantity) {
+                products[productName] = quantity;
+            }
+        });
+        localStorage.setItem('productQuantities', JSON.stringify(products));
+    };
+
+    // Function to load quantities from localStorage
+    const loadQuantities = () => {
+        const products = JSON.parse(localStorage.getItem('productQuantities')) || {};
+        document.querySelectorAll('tr').forEach(row => {
+            const productName = row.querySelector('td:nth-child(2)')?.textContent;
+            const quantityInput = row.querySelector('.quantity-input');
+            if (productName && quantityInput && products[productName]) {
+                quantityInput.value = products[productName];
+                updateStatus(quantityInput);
+            }
+        });
+    };
+
+    // Update existing event listeners
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('input', () => {
+            updateStatus(input);
+            saveQuantities();
+        });
+    });
+
+    document.querySelectorAll('.update-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const input = button.previousElementSibling;
+            updateStatus(input);
+            saveQuantities();
+        });
+    });
+
+    // Update form submission handler
+    document.getElementById('productForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const productName = document.getElementById('productName').value;
+        const category = document.getElementById('category').value;
+        const quantity = document.getElementById('initialQuantity').value;
+        const imageFile = document.getElementById('productImage').files[0];
+        const imageUrl = imageFile ? URL.createObjectURL(imageFile) : '';
+        
+        const initialStatus = quantity <= 0 ? 
+            '<span class="status-out-stock">Out of Stock</span>' :
+            quantity <= 30 ? 
+                '<span class="status-low-stock">Low Stock</span>' :
+                '<span class="status-in-stock">In Stock</span>';
+        
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td><img src="${imageUrl}" alt="${productName}" class="product-img"></td>
+            <td>${productName}</td>
+            <td>${category}</td>
+            <td>
+                <input type="number" class="quantity-input" value="${quantity}" min="0">
+                <button class="update-btn">Update</button>
+            </td>
+            <td>${initialStatus}</td>
+        `;
+        
+        const tbody = document.querySelector('tbody');
+        tbody.appendChild(newRow);
+        
+        // Add event listeners to new row
+        const newInput = newRow.querySelector('.quantity-input');
+        const newButton = newRow.querySelector('.update-btn');
+        
+        newInput.addEventListener('input', () => {
+            updateStatus(newInput);
+            saveQuantities();
+        });
+        newButton.addEventListener('click', () => {
+            updateStatus(newInput);
+            saveQuantities();
+        });
+        
+        saveQuantities();
+    });
+
+    // Load saved quantities when page loads
+    document.addEventListener('DOMContentLoaded', loadQuantities);
     </script>
 </body>
 </html>
